@@ -1,3 +1,12 @@
+import os
+import urllib.request
+
+MODEL_PATH = 'face_landmarker.task'
+if not os.path.exists(MODEL_PATH):
+    print("Скачивание модели Face Landmarker...")
+    url = "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task"
+    urllib.request.urlretrieve(url, MODEL_PATH)
+    print("Модель успешно скачана!")
 import eventlet
 eventlet.monkey_patch()
 import cv2
