@@ -1,3 +1,6 @@
+import eventlet
+eventlet.monkey_patch()  # Обязательно в самом начале!
+
 import os
 import urllib.request
 
@@ -7,8 +10,6 @@ if not os.path.exists(MODEL_PATH):
     url = "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task"
     urllib.request.urlretrieve(url, MODEL_PATH)
     print("Модель успешно скачана!")
-import eventlet
-eventlet.monkey_patch()
 import cv2
 import numpy as np
 import math
