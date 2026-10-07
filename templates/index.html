@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimodal DMS Dashboard - РКНП «Дарын»</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
+    <!-- ПОДКЛЮЧАЕМ SOCKET.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+</head>
+<body>
+
+<!-- СКРЫТЫЕ ЭЛЕМЕНТЫ ДЛЯ ЗАХВАТА ВЕБКАМЕРЫ ИЗ БРАУЗЕРА -->
+<video id="webcam" autoplay playsinline style="display:none;"></video>
+<canvas id="canvas" style="display:none;"></canvas>
+
+<div class="dashboard-container">
+    
+    <!-- ЛЕВАЯ ПАНЕЛЬ: Камера и Телеметрия -->
+    <div class="panel">
+        <h2>Визуальный мониторинг (Бэкенд)</h2>
+        
+        <div class="video-feed" id="video-canvas-container">
+            <!-- Теперь картинка приходит по сокетам, а не по http-ссылке -->
+            <img id="video_stream" src="" alt="Ожидание камеры..." style="width: 100%; border-radius: 8px; min-height: 240px; background: #000;">
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div>Состояние глаз</div>
+                <div class="metric-value" id="val-state" style="font-size: 1.4rem; color:#3fb950;">ЗАГРУЗКА...</div>
+            </div>
+            <div class="metric-card">
+                <div>Текущий EAR / Base</div>
+                <div class="metric-value" id="val-ear" style="font-size: 1.3rem;">0.000 / 0.0</div>
+            </div>
+            <div class="metric-card">
+                <div>PERCLOS (10s/60s)</div>
+                <div class="metric-value" id="val-perclos" style="font-size: 1.3rem;">0% / 0%</div>
+            </div>
+            <div class="metric-card">
+                <div>Закрытие (T_clos)</div>
+                <div class="metric-value" id="val-duration" style="font-size: 1.4rem; color:#58a6ff;">0.0s</div>
+            </div>
+            <div class="metric-card">
+                <div>Частота морганий</div>
+                <div class="metric-value" id="val-bpm" style="font-size: 1.4rem; color:#e3b341;">0 BPM</div>
+            </div>
+            <div class="metric-card">
+                <div>Трекинг лица</div>
+                <div class="metric-value" id="val-track" style="font-size: 1.2rem; color:#8b949e;">Ожидание...</div>
+            </div>
+        </div>
+    </div>
+    <!-- ПРАВАЯ ПАНЕЛЬ ОСТАЕТСЯ ТОЧНО ТАКОЙ ЖЕ, КАК БЫЛА -->
+    <!-- ... -->
